@@ -1,9 +1,9 @@
 # Lambda Function - Process Files
 
+## Description
 This Lambda Function is responsible for initiating an new EC2 instance, loading the script from s3 to ec2, executing the script on ec2 and terminating the ec2 instance.
 
-## Run Locally
-
+## Installation and Usage
 1. Clone the project
 
 ```bash

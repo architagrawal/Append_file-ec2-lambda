@@ -39,15 +39,6 @@ cd /tmp
 pip3 install boto3
 python3 /tmp/script.py ${file_id}`;
 
-      const j = `#!/bin/bash
-yum install python3-pip -y
-sudo yum update -y
-cd /home/ec2-user
-aws s3 cp s3://my-python-script/index.py /tmp/script.py
-cd /tmp
-pip install boto3
-python3 /tmp/script.py ${file_id}`;
-
       // Launch a new EC2 instance
       const instanceResponse = await ec2.send(
         new RunInstancesCommand({
@@ -82,7 +73,7 @@ python3 /tmp/script.py ${file_id}`;
       await sleep(10000);
       const fileNme = record.dynamodb.NewImage.input_file_path.S;
       const checkName = fileNme.split("/")[1];
-      await waitForFileCreation("archit-fovus-out", "Out-${checkName}.txt");
+      await waitForFileCreation("archit-fovus-out", `Out-${checkName}.txt`);
       await ec2.send(
         new TerminateInstancesCommand({
           InstanceIds: [instanceId],
